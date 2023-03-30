@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ApiRestThales", "ApiRestThales\ApiRestThales.vbproj", "{12888F14-05E6-43A3-9100-CDEF7C3A1326}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTestThales", "UnitTestThales\UnitTestThales.vbproj", "{10F7AEC1-D6C4-47DA-91A7-503E2969D42D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{12888F14-05E6-43A3-9100-CDEF7C3A1326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12888F14-05E6-43A3-9100-CDEF7C3A1326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12888F14-05E6-43A3-9100-CDEF7C3A1326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F7AEC1-D6C4-47DA-91A7-503E2969D42D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F7AEC1-D6C4-47DA-91A7-503E2969D42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F7AEC1-D6C4-47DA-91A7-503E2969D42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F7AEC1-D6C4-47DA-91A7-503E2969D42D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
