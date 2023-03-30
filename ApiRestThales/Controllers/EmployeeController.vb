@@ -17,7 +17,8 @@ Namespace Controllers
         <HttpGet>
         Public Function GetlEmployees() As List(Of EmployeeModel)
             Try
-                Dim GetAllEmployees As New List(Of EmployeeModel)()
+
+                Dim GetEmployees As New List(Of EmployeeModel)()
                 ConexionSqlServer.Open()
                 Comando = New SqlCommand("SPR_GET_EMPLOYEE", ConexionSqlServer) With {
                 .CommandType = CommandType.StoredProcedure,
@@ -34,8 +35,16 @@ Namespace Controllers
                         .AgeEmployee = Convert.ToInt32(EmployeeDataTable.Rows(i)(3)),
                         .ImageEmployee = EmployeeDataTable.Rows(i)(4)
                     }
-                        GetAllEmployees.Add(Employees)
+                        GetEmployees.Add(Employees)
                     Next
+                    Dim GetAllEmployees = (From Employees In GetEmployees Select New EmployeeModel With {
+                                                                              .IdEmployee = Employees.IdEmployee,
+                                                                              .NameEmployee = Employees.NameEmployee,
+                                                                              .SalaryEmployee = Employees.SalaryEmployee,
+                                                                              .AnualSalary = Employees.SalaryEmployee * 12,
+                                                                              .AgeEmployee = Employees.AgeEmployee,
+                                                                              .ImageEmployee = Employees.ImageEmployee}).ToList()
+
                     Return GetAllEmployees
                 Else
                     Return Nothing
