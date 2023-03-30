@@ -7,7 +7,13 @@ Public Class TestEmployee
     <TestMethod()>
     Public Sub TestGetEmployee()
         Try
-            Dim GetEmployeeModelText As New EmployeeModel
+            Dim GetEmployeeModelText As New EmployeeModel With
+                {
+                .NameEmployee = "Fernando",
+                .SalaryEmployee = "450000",
+                .AgeEmployee = "56",
+                .ImageEmployee = "Imagen"
+                }
             Dim retorno As String = GetEmployeClass.InsertEmployee(GetEmployeeModelText)
             Assert.AreEqual("GUARDADO CON EXITO", retorno)
         Catch ex As Exception
