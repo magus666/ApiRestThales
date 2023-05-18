@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Threading.Tasks
 Imports System.Web.Http
 
 Namespace Controllers
@@ -10,53 +11,12 @@ Namespace Controllers
         Dim Comando As SqlCommand
         Dim AdaptadorSql As New SqlDataAdapter()
         Dim EmployeeDataTable As New DataTable()
-        ''' <summary>
-        ''' Get Method to obtain all the Employees
-        ''' </summary>
-        ''' <returns></returns>
+
         <HttpGet>
-        Public Function GetlEmployees() As List(Of EmployeeModel)
-            Try
-
-                Dim GetEmployees As New List(Of EmployeeModel)()
-                ConexionSqlServer.Open()
-                Comando = New SqlCommand("SPR_GET_EMPLOYEE", ConexionSqlServer) With {
-                .CommandType = CommandType.StoredProcedure,
-                .Connection = ConexionSqlServer
-                }
-                AdaptadorSql.SelectCommand = Comando
-                AdaptadorSql.Fill(EmployeeDataTable)
-                If EmployeeDataTable.Rows.Count > 0 Then
-                    For i As Integer = 0 To EmployeeDataTable.Rows.Count - 1
-                        Dim Employees As New EmployeeModel With {
-                        .IdEmployee = Convert.ToInt32(EmployeeDataTable.Rows(i)(0)),
-                        .NameEmployee = EmployeeDataTable.Rows(i)(1),
-                        .SalaryEmployee = Convert.ToDouble(EmployeeDataTable(i)(2)),
-                        .AgeEmployee = Convert.ToInt32(EmployeeDataTable.Rows(i)(3)),
-                        .ImageEmployee = EmployeeDataTable.Rows(i)(4)
-                    }
-                        GetEmployees.Add(Employees)
-                    Next
-                    Dim GetAllEmployees = (From Employees In GetEmployees Select New EmployeeModel With {
-                                                                              .IdEmployee = Employees.IdEmployee,
-                                                                              .NameEmployee = Employees.NameEmployee,
-                                                                              .SalaryEmployee = Employees.SalaryEmployee,
-                                                                              .AnualSalary = Employees.SalaryEmployee * 12,
-                                                                              .AgeEmployee = Employees.AgeEmployee,
-                                                                              .ImageEmployee = Employees.ImageEmployee}).ToList()
-
-                    Return GetAllEmployees
-                Else
-                    Return Nothing
-                End If
-            Catch ex As Exception
-                Throw New Exception(ex.Message, ex)
-            Finally
-                ConexionSqlServer.Close()
-            End Try
+        Public Async Function GetEmployee() As Task(Of List(Of EmployeeModel))
+            Dim response = Await EmployeeClass.SelectEmployee()
+            Return response
         End Function
-
-
 
         Public Function GetlEmployeeById(IdEmployee As Integer) As List(Of EmployeeModel)
             Try
