@@ -38,11 +38,11 @@ Public Class Cl_Employee
         Await ConexionSqlServer.OpenAsync()
 
 
-        Dim command As New SqlCommand("SPR_GET_EMPLOYEE", ConexionSqlServer)
-        command.CommandType = CommandType.StoredProcedure
+        Comando = New SqlCommand("SPR_GET_EMPLOYEE", ConexionSqlServer)
+        Comando.CommandType = CommandType.StoredProcedure
         ' Agrega los parámetros necesarios al comando
         ' command.Parameters.Add(New SqlParameter("@ParameterName", "ParameterValue"))
-        Using reader As SqlDataReader = Await command.ExecuteReaderAsync()
+        Using reader As SqlDataReader = Await Comando.ExecuteReaderAsync()
             While Await reader.ReadAsync()
                 Dim Empleado As New EmployeeModel()
                 Empleado.IdEmployee = reader.GetInt32(reader.GetOrdinal("Id_Employee"))
